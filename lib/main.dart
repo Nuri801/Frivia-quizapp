@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Frivia',
       theme: ThemeData(
         fontFamily: "ArchitectsDaughter",
-        scaffoldBackgroundColor: const Color.fromRGBO(31, 31, 31, 1.9),
+        scaffoldBackgroundColor: const Color.fromRGBO(165, 241, 233, 0.5),
         primarySwatch: Colors.blue,
       ),
       home: WelcomePage(),

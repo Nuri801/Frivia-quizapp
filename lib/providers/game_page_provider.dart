@@ -24,6 +24,7 @@ class GamePageProvider extends ChangeNotifier {
     var _response = await _dio.get(
       '',
       queryParameters: {
+        // 'category': 10,
         'amount': 10,
         'type': 'boolean',
         'difficulty': difficultyLevel,
@@ -33,8 +34,6 @@ class GamePageProvider extends ChangeNotifier {
     var _data = jsonDecode(
       _response.toString(),
     );
-
-    print(_data);
 
     questions = _data["results"];
 
@@ -54,7 +53,7 @@ class GamePageProvider extends ChangeNotifier {
       context: context,
       builder: (BuildContext _context) {
         return AlertDialog(
-          backgroundColor: isCorrect ? Colors.green : Colors.red,
+          backgroundColor: isCorrect ? Colors.blue : Colors.blueGrey,
           title: Icon(
             isCorrect ? Icons.check_circle : Icons.cancel_sharp,
             color: Colors.white,

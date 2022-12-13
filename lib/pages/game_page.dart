@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quizly_app/providers/game_page_provider.dart';
+import 'package:loading_indicator/loading_indicator.dart';
+
 
 class GamePage extends StatelessWidget {
   late double _deviceHeight, _deviceWidth;
@@ -41,9 +43,13 @@ class GamePage extends StatelessWidget {
         } else {
           return const Scaffold(
             body: Center(
-              child: CircularProgressIndicator(
-                color: Colors.white,
-              ),
+              child: LoadingIndicator(
+                  indicatorType: Indicator.pacman, /// Required, The loading type of the widget
+                  // colors: [Colors.white],       /// Optional, The color collections
+                  strokeWidth: 1,                     /// Optional, The stroke of the line, only applicable to widget which contains line
+                  // backgroundColor: Colors.black,      /// Optional, Background of the widget
+                  // pathBackgroundColor: Colors.black   /// Optional, the stroke backgroundColor
+              )
             ),
           );
         }
@@ -96,7 +102,7 @@ class GamePage extends StatelessWidget {
       onPressed: () {
         _gameProvider?.answerQuestion("True");
       },
-      color: Colors.green,
+      color: Colors.blue,
       minWidth: _deviceWidth * 0.80,
       height: _deviceHeight * 0.10,
       child: const Text(
@@ -116,7 +122,7 @@ class GamePage extends StatelessWidget {
       onPressed: () {
         _gameProvider?.answerQuestion("False");
       },
-      color: Colors.red,
+      color: Colors.blueGrey,
       minWidth: _deviceWidth * 0.80,
       height: _deviceHeight * 0.10,
       child: const Text(
