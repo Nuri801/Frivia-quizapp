@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 class GamePageProvider extends ChangeNotifier {
   final Dio _dio = Dio();
-  final int _maxQuestions = 10;
+  final int _maxQuestions = 3;
   List? questions;
 
   int _currentQuestionCount = 0;
@@ -39,8 +39,6 @@ class GamePageProvider extends ChangeNotifier {
       _response.toString(),
     );
 
-    print(_data);
-
     questions = _data["results"];
 
     notifyListeners();
@@ -59,14 +57,18 @@ class GamePageProvider extends ChangeNotifier {
     showDialog(
       context: context,
       builder: (BuildContext _context) {
-        return AlertDialog(
-          backgroundColor: isCorrect ? Colors.blue : Colors.blueGrey,
-          title: Icon(
-            isCorrect ? Icons.check_circle : Icons.cancel_sharp,
-            color: Colors.white,
-            size: 40,
+        return Container(
+          height: 50,
+          width: 50,
+          child: AlertDialog(
+            backgroundColor: isCorrect ? Colors.blue : Colors.blueGrey,
+            title: Icon(
+              isCorrect ? Icons.check_circle : Icons.cancel_sharp,
+              color: Colors.white,
+              size: 40,
+            ),
+            // title:
           ),
-          // title:
         );
       },
     );
@@ -133,7 +135,7 @@ class GamePageProvider extends ChangeNotifier {
               },
             ),
           ],
-          backgroundColor: Colors.blue,
+          backgroundColor: Color.fromRGBO(103, 137, 131, 0.8),
           title: const Center(
             child: Text(
               'The End !',

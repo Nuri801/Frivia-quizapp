@@ -67,7 +67,7 @@ class _WelcomePageState extends State<WelcomePage> {
         controller.getLevel(controller.difficultyNum.toInt()),
         style: TextStyle(
           fontSize: 40,
-          color: Colors.white,
+          color: controller.colorList[controller.difficultyNum.toInt()-1],
         ),
       );
     });
@@ -110,3 +110,13 @@ class _WelcomePageState extends State<WelcomePage> {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+

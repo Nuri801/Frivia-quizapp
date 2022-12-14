@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quizly_app/providers/game_page_provider.dart';
 import 'package:loading_indicator/loading_indicator.dart';
-
+import 'package:get/get.dart';
+import '../providers/level_controller.dart';
 
 class GamePage extends StatelessWidget {
   late double _deviceHeight, _deviceWidth;
@@ -11,6 +14,8 @@ class GamePage extends StatelessWidget {
 
   //Injected the provider here:
   GamePageProvider? _gameProvider;
+
+  LevelController controller = Get.put(LevelController());
 
   @override
   Widget build(BuildContext context) {
@@ -41,14 +46,17 @@ class GamePage extends StatelessWidget {
         } else {
           return const Scaffold(
             body: Center(
-              child: LoadingIndicator(
-                  indicatorType: Indicator.pacman, /// Required, The loading type of the widget
-                  // colors: [Colors.white],       /// Optional, The color collections
-                  strokeWidth: 1,                     /// Optional, The stroke of the line, only applicable to widget which contains line
-                  // backgroundColor: Colors.black,      /// Optional, Background of the widget
-                  // pathBackgroundColor: Colors.black   /// Optional, the stroke backgroundColor
-              )
-            ),
+                child: LoadingIndicator(
+              indicatorType: Indicator.pacman,
+
+              /// Required, The loading type of the widget
+              // colors: [Colors.white],       /// Optional, The color collections
+              strokeWidth: 1,
+
+              /// Optional, The stroke of the line, only applicable to widget which contains line
+              // backgroundColor: Colors.black,      /// Optional, Background of the widget
+              // pathBackgroundColor: Colors.black   /// Optional, the stroke backgroundColor
+            )),
           );
         }
       },
@@ -61,7 +69,13 @@ class GamePage extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        _questionText(),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            levelText(),
+            _questionText(),
+          ],
+        ),
         Column(
           children: [
             _trueButton(),
@@ -71,6 +85,17 @@ class GamePage extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  Widget levelText() {
+    return GetBuilder<LevelController>(builder: (_) {
+      return Text(
+        'Level: ${controller.difficultyName}',
+        style: TextStyle(
+            fontSize: 25,
+            color: controller.colorList[controller.difficultyNum.toInt() - 1]),
+      );
+    });
   }
 
   Widget _questionText() {
