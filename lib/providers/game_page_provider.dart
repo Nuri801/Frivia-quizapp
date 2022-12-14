@@ -1,21 +1,25 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:quizly_app/providers/level_controller.dart';
+import 'package:get/get.dart';
 
 class GamePageProvider extends ChangeNotifier {
   final Dio _dio = Dio();
-  final int _maxQuestions = 3;
+  final int _maxQuestions = 10;
   List? questions;
 
   int _currentQuestionCount = 0;
   int _correctAnswers = 0;
 
 
+  LevelController controller = Get.find();
+
   BuildContext context;
 
-  final String difficultyLevel;
+  // final String difficultyLevel;
 
-  GamePageProvider({required this.context, required this.difficultyLevel}) {
+  GamePageProvider({required this.context}) {
     _dio.options.baseUrl = 'http://opentdb.com/api.php';
     _getQuestionFromAPI();
   }
@@ -27,13 +31,15 @@ class GamePageProvider extends ChangeNotifier {
         // 'category': 10,
         'amount': 10,
         'type': 'boolean',
-        'difficulty': difficultyLevel,
+        'difficulty': controller.getLevel(controller.difficultyNum.toInt()),
       },
     );
 
     var _data = jsonDecode(
       _response.toString(),
     );
+
+    print(_data);
 
     questions = _data["results"];
 
@@ -48,6 +54,7 @@ class GamePageProvider extends ChangeNotifier {
     bool isCorrect =
         questions![_currentQuestionCount]["correct_answer"] == _answer;
     _currentQuestionCount++;
+
 
     showDialog(
       context: context,

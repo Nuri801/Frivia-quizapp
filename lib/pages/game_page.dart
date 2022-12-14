@@ -7,12 +7,10 @@ import 'package:loading_indicator/loading_indicator.dart';
 class GamePage extends StatelessWidget {
   late double _deviceHeight, _deviceWidth;
 
-  final String difficultyLevel;
+  // final String difficultyLevel;
 
   //Injected the provider here:
   GamePageProvider? _gameProvider;
-
-  GamePage({required this.difficultyLevel});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +18,7 @@ class GamePage extends StatelessWidget {
     _deviceWidth = MediaQuery.of(context).size.width;
 
     return ChangeNotifierProvider(
-      create: (_context) => GamePageProvider(context: context, difficultyLevel: difficultyLevel),
+      create: (_context) => GamePageProvider(context: context),
       child: _buildUI(),
     );
   }
@@ -85,7 +83,7 @@ class GamePage extends StatelessWidget {
             _gameProvider!.getCurrentQuestionText(),
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 30,
+              fontSize: 33,
               fontWeight: FontWeight.w400,
             ),
             textAlign: TextAlign.center,
