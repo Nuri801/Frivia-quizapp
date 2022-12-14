@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:quizly_app/providers/game_page_provider.dart';
 import '../providers/level_controller.dart';
 import 'game_page.dart';
 import 'package:get/get.dart';
@@ -12,12 +10,6 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
   late double _deviceHeight, _deviceWidth;
-  double level = 1;
-
-  // final List<String> _difficultyTexts = ['easy', 'medium', 'hard'];
-
-  //Injected the provider here:
-  // GamePageProvider? _gameProvider;
 
   LevelController controller = Get.put(LevelController());
 
@@ -69,16 +61,6 @@ class _WelcomePageState extends State<WelcomePage> {
     );
   }
 
-  // Widget difficultyLevel() {
-  //   return Text(
-  //     _difficultyTexts[level.toInt() - 1],
-  //     style: TextStyle(
-  //       fontSize: 40,
-  //       color: Colors.white,
-  //     ),
-  //   );
-  // }
-
   Widget difficultyLevel() {
     return GetBuilder<LevelController>(builder: (_){
       return Text(
@@ -90,25 +72,6 @@ class _WelcomePageState extends State<WelcomePage> {
       );
     });
   }
-
-  // Widget levelSlider() {
-  //   return Slider(
-  //     min: 1,
-  //     max: 3,
-  //     value: level,
-  //     onChanged: (newValue) {
-  //       setState(
-  //         () {
-  //           level = newValue;
-  //         },
-  //       );
-  //     },
-  //     divisions: 2,
-  //     label: _difficultyTexts[level.toInt() - 1],
-  //   );
-  // }
-
-
 
   Widget levelSlider() {
     return GetBuilder<LevelController>(builder: (_){
